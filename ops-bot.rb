@@ -3,12 +3,36 @@ require 'httparty'
 
 class OpsBot < SlackRubyBot::Bot
 
+	@oncall_user = "Arun is on call, Carlos is backup"
+
+	SlackRubyBot.configure do |config|
+		config.aliases = ['opsbot']
+		config.send_gifs = false
+	end
+
+	help do
+		title 'Ops Bot'
+		desc 'This bot enhances our operations capabilities.'
+
+		command 'INC<#>' do
+			desc 'Gives you a direct link to a ServiceNow Incident.'
+			long_desc "I give you a direct link to a ServiceNow Incident so you can skip the time consuming \'copy, paste, search\' routine."
+		end
+
+		command 'RITM<#>' do
+			desc 'Gives you a direct link to a ServiceNow Request.'
+			long_desc "I give you a direct link to a ServiceNow Request so you can skip the time consuming \'copy, paste, search\' routine."
+		end
+
+		command 'Who\'s on call this weekend?' do
+			desc 'Tells you who is on call this weekend.'
+		end
+	end
+
+
 	SN_INC_BASE_URL="https://wcmcprd.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number="
 	SN_RITM_BASE_URL="https://wcmcprd.service-now.com/nav_to.do?uri=sc_req_item.do?sysparm_query=number="
 
-	command 'oncall' do |client, data, match|
-		
-	end
 
 	command 'ping' do |client, data, match|
 		client.say(text: 'pong', channel: data.channel)
@@ -28,8 +52,17 @@ class OpsBot < SlackRubyBot::Bot
 		end
 	end
 
-	match /(on\scall|oncall)/ do |client, data, match|
-		client.say(channel: data.channel, text: "@carlos is on call this weekend!")
+	match /on\scall/i do |client, data, match|
+		if @oncall_user == ""
+			client.say(channel: data.channel, text: "No one is on call!!!")
+		else
+			client.say(channel: data.channel, text: "#{@oncall_user} is on call this weekend!")
+		end
+	end
+
+	match /i\'m on call/i do |client, data, match|
+		@oncall_user = data['user']['id']
+		client.say(channel: data.channel, text: "#{@oncall_user} is now the user on call!")
 	end
 
 
