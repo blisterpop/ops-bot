@@ -69,7 +69,7 @@ class OpsBot < SlackRubyBot::Bot
 		commands = data["text"].split(" ")
 
 		if commands[1] == "announce"
-			client.web_client.chat_postMessage(channel: '#ops-bot-testing', text: "I'm Baaack")
+			client.web_client.chat_postMessage(channel: '#ops-sys', text: "I'm Baaack")
 		else
 			client.say(channel: data.channel, text: "Unknown Admin Command")
 		end
