@@ -4,14 +4,14 @@ require 'httparty'
 class OpsBot < SlackRubyBot::Bot
 
 	@oncall_msg = "OPS On-Call\n\n
-Primary - Carlos Castilla\n
-cac2055@med.cornell.edu\n
-Cell - (646) 939-0078\n
-\n---\n\n
-Secondary - Danny Tan\n
-gut2001@med.cornell.edu\n
-Home 718-265-0869\n
-Cell 347-236-6019\n\n"
+Primary - Carlos Castilla
+cac2055@med.cornell.edu
+Cell - (646) 939-0078
+\n---\n
+Secondary - Danny Tan
+gut2001@med.cornell.edu
+Home 718-265-0869
+Cell 347-236-6019\n"
 
 	def self.post_on_call_message(client, chan)
 			client.web_client.chat_postMessage(channel: "#{chan}", text: "#{@oncall_msg}")
@@ -68,7 +68,7 @@ Cell 347-236-6019\n\n"
 		
 	end
 
-	match /\!admin.*/ do |client,data,match|
+	match /^\!admin.*/ do |client,data,match|
 		commands = data["text"].split(" ")
 
 		if commands[1] == "announce"
