@@ -3,7 +3,15 @@ require 'httparty'
 
 class OpsBot < SlackRubyBot::Bot
 
-	@oncall_user = "Carlos is on call, Danny is backup"
+	@oncall_msg = "OPS On-Call\n\n
+Primary - Carlos Castilla\n
+cac2055@med.cornell.edu\n
+Cell - (646) 939-0078\n
+\n---\n\n
+Secondary - Danny Tan\n
+gut2001@med.cornell.edu\n
+Home 718-265-0869\n
+Cell 347-236-6019\n\n"
 
 	SlackRubyBot.configure do |config|
 		config.aliases = ['opsbot', 'OpsBot', 'ops bot']
@@ -53,16 +61,7 @@ class OpsBot < SlackRubyBot::Bot
 	end
 
 	match /on call/i do |client, data, match|
-		if @oncall_user == ""
-			client.say(channel: data.channel, text: "No one is on call!!!")
-		else
-			client.say(channel: data.channel, text: "#{@oncall_user} is on call this weekend!")
-		end
-	end
-
-	match /i\'m on call/i do |client, data, match|
-		@oncall_user = data['user']['id']
-		client.say(channel: data.channel, text: "#{@oncall_user} is now the user on call!")
+		
 	end
 
 	match /\!admin.*/ do |client,data,match|
@@ -70,9 +69,19 @@ class OpsBot < SlackRubyBot::Bot
 
 		if commands[1] == "announce"
 			client.web_client.chat_postMessage(channel: '#ops-sys', text: "I'm Baaack")
+		elsif commands[1] == "oncall"
+			if commands[2] == ""
+				post_on_call_message(data.channel)
+			else
+				post_on_call_message(commands[2])
+			end
 		else
 			client.say(channel: data.channel, text: "Unknown Admin Command")
 		end
+	end
+
+	def post_on_call_message(chan)
+			client.web_client.chat_postMessage(channel: "#{chan}", text: "#{@oncall_msg}")
 	end
 
 end
