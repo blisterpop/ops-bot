@@ -3,10 +3,10 @@ require 'httparty'
 
 class OpsBot < SlackRubyBot::Bot
 
-	@oncall_user = "Arun is on call, Carlos is backup"
+	@oncall_user = "Carlos is on call, Danny is backup"
 
 	SlackRubyBot.configure do |config|
-		config.aliases = ['opsbot']
+		config.aliases = ['opsbot', 'OpsBot', 'ops bot']
 		config.send_gifs = false
 	end
 
@@ -52,7 +52,7 @@ class OpsBot < SlackRubyBot::Bot
 		end
 	end
 
-	match /on\scall/i do |client, data, match|
+	match /on call/i do |client, data, match|
 		if @oncall_user == ""
 			client.say(channel: data.channel, text: "No one is on call!!!")
 		else
