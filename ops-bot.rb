@@ -74,7 +74,7 @@ Cell 347-236-6019\n"
 		if commands[1] == "announce"
 			client.web_client.chat_postMessage(channel: '#ops-sys', text: "I'm Baaack")
 		elsif commands[1] == "oncall"
-			if commands[2] == ""
+			if commands[2] == "here"
 				post_on_call_message(client, data.channel)
 			else
 				post_on_call_message(client, commands[2])
