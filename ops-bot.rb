@@ -66,9 +66,13 @@ class OpsBot < SlackRubyBot::Bot
 	end
 
 	match /\!admin.*/ do |client,data,match|
-		client.say(channel: data.channel, text: "#{client.to_s}")
-		client.say(channel: data.channel, text: "#{data.to_s}")
-		client.say(channel: data.channel, text: "#{match.to_s}")
+		commands = data["text"].split(" ")
+
+		if commands[1] == "announce"
+			client.say(channel: data.channel, text: "I'm Baaack")
+		else
+			client.say(channel: data.channel, text: "Unknown Admin Command")
+		end
 	end
 
 end
