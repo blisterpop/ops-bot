@@ -65,7 +65,7 @@ Cell 347-236-6019\n"
 	end
 
 	match /on call/i do |client, data, match|
-		
+		post_on_call_message(client, data.channel)
 	end
 
 	match /^\!admin.*/ do |client,data,match|
