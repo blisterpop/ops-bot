@@ -51,16 +51,14 @@ Cell 347-236-6019\n"
 	end
 
 	scan (/\bINC\d{7}\b/i) do |client, data, match|
-		client.say(channel: data.channel, text: "Hey that looks like a Service Now Incident!\nHere's a helpful link: ")
 		match.each do |m|
-			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "<#{SN_INC_BASE_URL}#{m} | #{m}>")
+			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a helpful link: <#{SN_INC_BASE_URL}#{m} | #{m}>")
 		end
 	end
 
 	scan (/\bRITM\d{7}\b/i) do |client, data, match|
-		client.say(channel: data.channel, text: "Hey that looks like a Service Now Request!\nHere's a helpful link: ")
 		match.each do |m|
-			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "<#{SN_RITM_BASE_URL}#{m} | #{m}>")
+			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a helpful link: <#{SN_RITM_BASE_URL}#{m} | #{m}>")
 		end
 	end
 
