@@ -65,6 +65,11 @@ class OpsBot < SlackRubyBot::Bot
 		client.say(channel: data.channel, text: "#{@oncall_user} is now the user on call!")
 	end
 
+	match /\!admin.*/ do |client,data,match|
+		client.say(channel: data.channel, text: "#{client.to_s}")
+		client.say(channel: data.channel, text: "#{data.to_s}")
+		client.say(channel: data.channel, text: "#{match.to_s}")
+	end
 
 end
 
