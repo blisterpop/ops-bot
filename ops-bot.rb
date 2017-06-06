@@ -52,13 +52,13 @@ Cell 347-236-6019\n"
 
 	scan (/\bINC\d{7}\b/i) do |client, data, match|
 		match.each do |m|
-			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a helpful link: <#{SN_INC_BASE_URL}#{m} | #{m}>")
+			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a direct link: <#{SN_INC_BASE_URL}#{m} | #{m}>")
 		end
 	end
 
 	scan (/\bRITM\d{7}\b/i) do |client, data, match|
 		match.each do |m|
-			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a helpful link: <#{SN_RITM_BASE_URL}#{m} | #{m}>")
+			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a direct link: <#{SN_RITM_BASE_URL}#{m} | #{m}>")
 		end
 	end
 
