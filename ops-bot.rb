@@ -3,15 +3,16 @@ require 'httparty'
 
 class OpsBot < SlackRubyBot::Bot
 
-	@oncall_msg = "OPS On-Call\n\n
-Primary - Carlos Castilla
-cac2055@med.cornell.edu
-Cell - (646) 939-0078
-\n---\n
-Secondary - Danny Tan
+	@oncall_msg = "OPS On-Call:\n
+Primary - Danny Tan
 gut2001@med.cornell.edu
 Home 718-265-0869
-Cell 347-236-6019\n"
+Cell 347-236-6019
+---
+Secondary - Eneida Joseph
+enj3001@med.cornell.edu
+Home 973-563-4807
+Cell 646-276-6223\n"
 
 	def self.post_on_call_message(client, chan)
 			client.web_client.chat_postMessage(channel: "#{chan}", text: "#{@oncall_msg}")
@@ -58,7 +59,7 @@ Cell 347-236-6019\n"
 
 	scan (/\bRITM\d{7}\b/i) do |client, data, match|
 		match.each do |m|
-			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a direct link: <#{SN_RITM_BASE_URL}#{m} | #{m}>")
+			client.web_client.chat_postMessage(channel: data.channel, as_user: true, text: "Here's a directink: <#{SN_RITM_BASE_URL}#{m} | #{m}>")
 		end
 	end
 
