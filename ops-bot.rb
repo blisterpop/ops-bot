@@ -4,15 +4,14 @@ require 'httparty'
 class OpsBot < SlackRubyBot::Bot
 
 	@oncall_msg = "OPS On-Call:\n
-Primary - Eneida Joseph
-enj3001@med.cornell.edu
-Home - 973-563-4807
-Cell - 646-276-6223
+Primary - Edsel Rosel
+evr2001@med.cornell.edu
+Home - 732-422-9936
+Cell - 917-675-2514
 ---
-Secondary - Arun Srivivasan
-ars3006@med.cornell.edu
-Home - 916-642-2787
-Cell - 917-797-3823\n"
+Secondary - Carlos Castilla
+cac2055@med.cornell.edu
+Cell - (646) 939-0078\n"
 
 	def self.post_on_call_message(client, chan)
 			client.web_client.chat_postMessage(channel: "#{chan}", text: "#{@oncall_msg}")
