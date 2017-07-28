@@ -14,9 +14,9 @@ class OpsBot < SlackRubyBot::Bot
 	end
 
 	def self.set_on_call_message(primary, secondary)
-		@oncall_primary = primary
-		@oncall_secondary = secondary
-		@oncall_msg = "OPS On-Call:\n#{@oncall_primary}\n--------------------#{@oncall_secondary}\n"
+		@oncall_primary = @config["ops-users"]["#{primary}"]
+		@oncall_secondary = @config["ops-users"]["#{secondary}"]
+		@oncall_msg = "OPS On-Call:\n#{@oncall_primary}\n--------------------\n#{@oncall_secondary}\n"
 	end
 
 	SlackRubyBot.configure do |config|
