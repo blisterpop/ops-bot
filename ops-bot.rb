@@ -80,9 +80,11 @@ class OpsBot < SlackRubyBot::Bot
 				post_on_call_message(client, commands[2])
 			end
 		elsif commands[1] == 'set_oncall'
-			puts commands[2]
-			puts commands[3]
-			set_on_call_message(commands[2], commands[3])
+			if commands[2].nil? || commands[3].nil?
+				client.say(channel: data.channel, text: "You must provide two users for the oncall! Pick from these: #{@config['ops-users'].keys}")
+			else
+				set_on_call_message(commands[2], commands[3])
+			end
 		else
 			client.say(channel: data.channel, text: "Unknown Admin Command")
 		end
