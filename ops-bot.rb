@@ -1,21 +1,22 @@
 require 'slack-ruby-bot'
 require 'httparty'
+require 'yaml'
 
 class OpsBot < SlackRubyBot::Bot
 
-	@oncall_msg = "OPS On-Call:\n
-Primary - Carlos Castilla
-cac2055@med.cornell.edu
-Cell 646-939-0078
----
-Secondary - Danny Tan
-gut2001@med.cornell.edu
-Home 718-265-0869
-Cell 347-236-6019
-\n"
+	attr_accessor :oncall_primary, :oncall_secondary
 
+	@config = YAML.load_file("config.yml")
+	
+	
 	def self.post_on_call_message(client, chan)
 			client.web_client.chat_postMessage(channel: "#{chan}", text: "#{@oncall_msg}")
+	end
+
+	def self.set_on_call_message(primary, secondary)
+		@oncall_primary = primary
+		@oncall_secondary = secondary
+		@oncall_msg = "OPS On-Call:\n#{@oncall_primary}\n--------------------#{@oncall_secondary}\n"
 	end
 
 	SlackRubyBot.configure do |config|
@@ -72,12 +73,16 @@ Cell 347-236-6019
 
 		if commands[1] == "announce"
 			client.web_client.chat_postMessage(channel: '#ops-sys', text: "I'm Baaack")
-		elsif commands[1] == "oncall"
+		elsif commands[1] == "get_oncall"
 			if commands[2] == "here"
 				post_on_call_message(client, data.channel)
 			else
 				post_on_call_message(client, commands[2])
 			end
+		elsif commands[1] == 'set_oncall'
+			puts commands[2]
+			puts commands[3]
+			set_on_call_message(commands[2], commands[3])
 		else
 			client.say(channel: data.channel, text: "Unknown Admin Command")
 		end
