@@ -10,7 +10,9 @@ class OpsBot < SlackRubyBot::Bot
 	
 	
 	def self.post_on_call_message(client, chan)
+		if chan.include?("ops")
 			client.web_client.chat_postMessage(channel: "#{chan}", text: "#{@oncall_msg}")
+		end
 	end
 
 	def self.set_on_call_message(primary, secondary)
