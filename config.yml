@@ -5,3 +5,15 @@ ops-users:
   arun: "Arun Srivivasan\nars3006@med.cornell.edu\nHome - 916-642-2787\nCell - 917-797-3823"
   edsel: "Edsel Rosel\nevr2001@med.cornell.edu\nHome - 732-422-9936\nCell - 917-675-2514"
   danny: "Danny Tan\ngut2001@med.cornell.edu\nHome 718-265-0869\nCell 347-236-6019"
+
+on-call-channels:
+  # ops-sys
+  - "G1PCRV3AN"
+  # ops-assist
+  - "C1U7TJUN9"
+  # ops-broadcast
+  - "C033G2WAF"
+  # ops-bot-testing
+  - "C5MEQU746"
+  # carlos-test-channel
+  - "G4TKBKL3G"
