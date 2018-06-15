@@ -111,8 +111,9 @@ class OpsBot < SlackRubyBot::Bot
 	# 3. Problem
 	SN_PRB_BASE_URL="https://wcmcprd.service-now.com/nav_to.do?uri=problem.do?sysparm_query=number="
 
-  # 4. Outage
-  SN_OUTG_BASE_URL="https://wcmcprd.service-now.com/nav_to.do?uri=cmdb_ci_outage.do?sysparm_query=number="
+  	# 4. Outage
+   	# fix query, outage's Number is u_number --rhu 2018.05.21
+   	SN_OUTG_BASE_URL="https://wcmcprd.service-now.com/nav_to.do?uri=cmdb_ci_outage.do?sysparm_query=u_number="
 
   # 5. Change
   SN_CHG_BASE_URL="https://wcmcprd.service-now.com/nav_to.do?uri=change_request.do?sysparm_query=number="
