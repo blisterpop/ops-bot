@@ -1,0 +1,3 @@
+add better comments for commands 
+add feedback for set_oncall "on call contacts set - OK"
+change the feedback for set_oncall failure to include restart and actual syntax
